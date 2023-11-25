@@ -1,5 +1,5 @@
 package functions;
 
 public interface MathFunction {
-    double apply(double x);
+    public double apply(double x);
 }
