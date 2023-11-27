@@ -2,7 +2,6 @@ package functions;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected int count;
-
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
@@ -30,54 +29,5 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
                 return interpolate(x, floorIndex);
             }
         }
-    }
-
-    @Override
-    public int getCount() {
-        return count;
-    }
-
-    @Override
-    public int indexOfX(double x) {
-        for (int i = 0; i < count; i++) {
-            if (getX(i) == x) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public int indexOfY(double y) {
-        for (int i = 0; i < count; i++) {
-            if (getY(i) == y) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public void setY(int index, double value) {
-        if (index >= 0 && index < count) {
-            double oldY = getY(index);
-            if (oldY != value) {
-                setYImpl(index, value);
-            }
-        } else {
-            throw new IllegalArgumentException("Index out of bounds");
-        }
-    }
-
-    protected abstract void setYImpl(int index, double value);
-
-    @Override
-    public double leftBound() {
-        return getX(0);
-    }
-
-    @Override
-    public double rightBound() {
-        return getX(count - 1);
     }
 }
