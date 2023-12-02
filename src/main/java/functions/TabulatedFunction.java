@@ -9,4 +9,5 @@ public interface TabulatedFunction extends MathFunction{
     int indexOfY(double y);
     double leftBound();
     double rightBound();
+
 }
