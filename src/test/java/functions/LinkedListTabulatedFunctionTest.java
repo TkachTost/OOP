@@ -5,15 +5,38 @@ import org.testng.annotations.Test;
 
 import javax.xml.soap.Node;
 
-import static org.testng.Assert.*;
-
 public class LinkedListTabulatedFunctionTest {
     private double[] xval={1,2,3,4,5};
     private double[] yval={1,2,3,4,5};
     LinkedListTabulatedFunction list=new LinkedListTabulatedFunction(xval,yval);
     @Test
+    public void toStringTest(){
+        for(int i=0;i<5;i++){
+            Assert.assertEquals("("+xval[i]+"; "+yval[i]+")",list.getNodep(i).toString());
+        }
+    }
+    LinkedListTabulatedFunction o=new LinkedListTabulatedFunction(xval,yval);
+    @Test
+    public void equalsTest(){
+        for(int i=0;i<5;i++){
+            Assert.assertTrue(list.getNodep(i).equals(o.getNodep(i)));
+        }
+    }
+    @Test
     public void testLeftBound() {
         Assert.assertEquals(xval[0],list.leftBound());
+    }
+    @Test
+    public void hashCodeTest(){
+        for(int i=0;i<5;i++){
+            Assert.assertEquals(i+1^i+1,list.getNodep(i).hashCode());
+        }
+    }
+    @Test
+    public void cloneTest() {
+        for (int i=0;i<5;i++){
+            Assert.assertEquals(list.getNodep(i),list.getNodep(i).clone());
+        }
     }
 
     @Test

@@ -6,6 +6,28 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         public Node prev;
         public double x;
         public double y;
+        public String toString(){
+            return "(" + x + "; "+ y + ")";
+        }
+        public boolean equals(Object o){
+            if(o==this){
+                return true;
+            }
+            if(o instanceof Node){
+                Node node = (Node) o;
+                return this.x == node.x && this.y == node.y;
+            }
+            return false;
+        }
+        public int hashCode(){
+            return Double.hashCode(x) ^ Double.hashCode(y);
+        }
+        public Object clone(){
+            Node o=this;
+            o.next=this.next;
+            o.prev=this.prev;
+            return o;
+        }
     }
 
     private Node head;
@@ -152,5 +174,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         } else {
             return interpolate(x, count - 2);
         }
+    }
+    public Node getNodep(int index) {
+        Node node=head;
+        for(int i=0;i<index;i++){
+            node=node.next;
+        }
+        return node;
     }
 }
