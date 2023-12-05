@@ -93,4 +93,29 @@ public class ArrayTabulatedFunctionTest {
         Assert.assertEquals(1.0,val.interpolate(1,2));
         Assert.assertEquals(2.0,val.interpolate(2,2));
     }
+
+    @Test
+    public void testTestToString() {
+        Assert.assertEquals("1.0 2.0 3.0 4.0 5.0 1.0 2.0 3.0 4.0 5.0 ",val.toString());
+    }
+
+    ArrayTabulatedFunction o=new ArrayTabulatedFunction(xval,yval);
+    @Test
+    public void testTestEquals() {
+        Assert.assertTrue(val.equals(o));
+    }
+
+    @Test
+    public void testTestHashCode() {
+        int hash = 0;
+        for (int i = 0; i < 5; i++) {
+            hash += Double.hashCode(xval[i]) ^ Double.hashCode(yval[i]);
+        }
+        Assert.assertEquals(hash,val.hashCode());
+    }
+
+    @Test
+    public void testTestClone() {
+        Assert.assertEquals(val,val.clone());
+    }
 }

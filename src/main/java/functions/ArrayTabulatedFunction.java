@@ -124,4 +124,37 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         double rightY = yValues[floorIndex + 1];
         return interpolate(x, leftX, rightX, leftY, rightY);
     }
+    public String toString(){
+        String result=new String();
+        for (int i=0;i<count;i++) {
+            result = result + xValues[i] + " ";
+        }
+        for (int i=0;i<count;i++) {
+            result = result + yValues[i] + " ";
+        }
+        return result;
+    }
+    public boolean equals(Object o){
+        if (o instanceof ArrayTabulatedFunction){
+            ArrayTabulatedFunction arr=(ArrayTabulatedFunction) o;
+            for(int i=0;i<count;i++){
+                if(((ArrayTabulatedFunction) o).xValues[i]!=this.xValues[i]||((ArrayTabulatedFunction) o).yValues[i]!=this.yValues[i]){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    public int hashCode(){
+        int hash = 0;
+        for (int i = 0; i < count; i++) {
+            hash += Double.hashCode(xValues[i]) ^ Double.hashCode(yValues[i]);
+        }
+        return hash;
+    }
+    public Object clone(){
+        ArrayTabulatedFunction o=this;
+        return o;
+    }
 }
