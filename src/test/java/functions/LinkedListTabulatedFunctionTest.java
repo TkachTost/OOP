@@ -86,4 +86,31 @@ public class LinkedListTabulatedFunctionTest {
         Assert.assertEquals(1.0,list.extrapolateLeft(1));
         Assert.assertEquals(2.0,list.extrapolateLeft(2));
     }
+
+    @Test
+    public void testTestToString() {
+        Assert.assertEquals("1.0 2.0 3.0 4.0 5.0 1.0 2.0 3.0 4.0 5.0 ",list.toString());
+
+    }
+    @Test
+    public void testTestEquals() {
+        Assert.assertTrue(list.equals(o));
+    }
+
+    @Test
+    public void testTestHashCode() {
+        int hash = 0;
+        for (int i = 0; i < 5; i++) {
+            hash += Double.hashCode(xval[i]) ^ Double.hashCode(yval[i]);
+        }
+        Assert.assertEquals(hash,list.hashCode());
+    }
+
+    @Test
+    public void testTestClone (){
+        LinkedListTabulatedFunction o= (LinkedListTabulatedFunction) list.clone();
+        for (int i=0;i<5;i++){
+            Assert.assertEquals(list.getX(i),o.getX(i));
+        }
+    }
 }

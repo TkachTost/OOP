@@ -30,7 +30,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
     }
 
+
     private Node head;
+
 
     private void addNode(double x, double y){
         Node newNode = new Node();
@@ -53,6 +55,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
+        count=xValues.length;
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
@@ -181,5 +184,38 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
             node=node.next;
         }
         return node;
+    }
+    public String toString(){
+        String result=new String();
+        for (int i=0;i<count;i++) {
+            result = result + this.getX(i) + " ";
+        }
+        for (int i=0;i<count;i++) {
+            result = result + this.getY(i) + " ";
+        }
+        return result;
+    }
+    public boolean equals(Object o){
+        if (o instanceof LinkedListTabulatedFunction){
+            LinkedListTabulatedFunction ll= (LinkedListTabulatedFunction) o;
+            for(int i=0;i<count;i++){
+                if(ll.getX(i)!=this.getX(i) || ll.getY(i)!=this.getY(i)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    public int hashCode(){
+        int hash = 0;
+        for (int i = 0; i < count; i++) {
+            hash += Double.hashCode(this.getX(i)) ^ Double.hashCode(this.getY(i));
+        }
+        return hash;
+    }
+    public Object clone (){
+        LinkedListTabulatedFunction clone = this;
+        return clone;
     }
 }
