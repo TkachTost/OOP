@@ -1,5 +1,6 @@
 package functions;
 
+import javafx.scene.chart.AxisBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,7 +35,8 @@ public class IdentityFunctionTest {
     }
 
     @Test
-    public void testTestClone() {
-        Assert.assertEquals(tst,tst.clone());
+    public void testTestClone() throws CloneNotSupportedException {
+        IdentityFunction cl= (IdentityFunction) tst.clone();
+        Assert.assertTrue(tst.equals(cl));
     }
 }

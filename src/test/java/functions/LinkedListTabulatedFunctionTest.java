@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import javax.xml.soap.Node;
 
-public class LinkedListTabulatedFunctionTest {
+public class LinkedListTabulatedFunctionTest implements Cloneable{
     private double[] xval={1,2,3,4,5};
     private double[] yval={1,2,3,4,5};
     LinkedListTabulatedFunction list=new LinkedListTabulatedFunction(xval,yval);
@@ -33,9 +33,11 @@ public class LinkedListTabulatedFunctionTest {
         }
     }
     @Test
-    public void cloneTest() {
+    public void cloneTest() throws CloneNotSupportedException {
         for (int i=0;i<5;i++){
-            Assert.assertEquals(list.getNodep(i),list.getNodep(i).clone());
+            functions.LinkedListTabulatedFunction.Node cl = (LinkedListTabulatedFunction.Node) list.getNodep(i).clone();
+            Assert.assertEquals(list.getNodep(i).toString(),cl.toString());
+
         }
     }
 
@@ -89,12 +91,18 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testTestToString() {
-        Assert.assertEquals("1.0 2.0 3.0 4.0 5.0 1.0 2.0 3.0 4.0 5.0 ",list.toString());
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        Assert.assertEquals("1.0 2.0 3.0 4.0 5.0 1.0 2.0 3.0 4.0 5.0 ",llist.toString());
 
     }
     @Test
     public void testTestEquals() {
-        Assert.assertTrue(list.equals(o));
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        Assert.assertTrue(llist.equals(o));
     }
 
     @Test
@@ -107,7 +115,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void testTestClone (){
+    public void testTestClone () throws CloneNotSupportedException {
         LinkedListTabulatedFunction o= (LinkedListTabulatedFunction) list.clone();
         for (int i=0;i<5;i++){
             Assert.assertEquals(list.getX(i),o.getX(i));

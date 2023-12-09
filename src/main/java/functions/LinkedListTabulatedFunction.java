@@ -1,14 +1,16 @@
 package functions;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
-    protected static class Node{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
+    protected static class Node implements Cloneable{
         public Node next;
         public Node prev;
         public double x;
         public double y;
+        @Override
         public String toString(){
             return "(" + x + "; "+ y + ")";
         }
+        @Override
         public boolean equals(Object o){
             if(o==this){
                 return true;
@@ -19,14 +21,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
             }
             return false;
         }
+        @Override
         public int hashCode(){
             return Double.hashCode(x) ^ Double.hashCode(y);
         }
-        public Object clone(){
-            Node o=this;
-            o.next=this.next;
-            o.prev=this.prev;
-            return o;
+        @Override
+        public Object clone() throws CloneNotSupportedException {
+            return (LinkedListTabulatedFunction.Node) super.clone();
         }
     }
 
@@ -185,6 +186,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         return node;
     }
+    @Override
     public String toString(){
         String result=new String();
         for (int i=0;i<count;i++) {
@@ -195,6 +197,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         return result;
     }
+    @Override
     public boolean equals(Object o){
         if (o instanceof LinkedListTabulatedFunction){
             LinkedListTabulatedFunction ll= (LinkedListTabulatedFunction) o;
@@ -207,6 +210,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         return false;
     }
+    @Override
     public int hashCode(){
         int hash = 0;
         for (int i = 0; i < count; i++) {
@@ -214,8 +218,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         return hash;
     }
-    public Object clone (){
-        LinkedListTabulatedFunction clone = this;
-        return clone;
+    @Override
+    public Object clone () throws CloneNotSupportedException {
+        return (LinkedListTabulatedFunction)super.clone();
     }
 }

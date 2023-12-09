@@ -2,7 +2,7 @@ package functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private double[] xValues;
     private double[] yValues;
 
@@ -124,6 +124,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         double rightY = yValues[floorIndex + 1];
         return interpolate(x, leftX, rightX, leftY, rightY);
     }
+    @Override
     public String toString(){
         String result=new String();
         for (int i=0;i<count;i++) {
@@ -134,6 +135,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         }
         return result;
     }
+    @Override
     public boolean equals(Object o){
         if (o instanceof ArrayTabulatedFunction){
             ArrayTabulatedFunction arr=(ArrayTabulatedFunction) o;
@@ -146,6 +148,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         }
         return false;
     }
+    @Override
     public int hashCode(){
         int hash = 0;
         for (int i = 0; i < count; i++) {
@@ -153,8 +156,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
         }
         return hash;
     }
-    public Object clone(){
-        ArrayTabulatedFunction o=this;
-        return o;
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return (ArrayTabulatedFunction)super.clone();
     }
 }
