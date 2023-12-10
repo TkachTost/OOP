@@ -93,16 +93,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     public double getX(int index) {
+        if(index<0 || index>=this.count){
+            throw new IllegalArgumentException();
+        }
         return getNode(index).x;
     }
 
     @Override
     public double getY(int index) {
+        if(index<0 || index>=this.count){
+            throw new IllegalArgumentException();
+        }
         return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
+        if(index<0 || index>=this.count){
+            throw new IllegalArgumentException();
+        }
         getNode(index).y = value;
     }
 
@@ -115,7 +124,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             }
             node = node.next;
         }
-        return -1;
+        throw new IllegalArgumentException();
     }
 
     @Override
@@ -127,12 +136,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             }
             node = node.next;
         }
-        return -1;
+        throw new IllegalArgumentException();
     }
     @Override
     public int floorIndexOfX(double x) {
         if (x < head.x) {
-            return -1;
+            throw new IllegalArgumentException();
         }
         if (x > head.prev.x) {
             return count - 2;
@@ -148,6 +157,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public double interpolate(double x, int floorIndex) {
+        if(floorIndex<0 || floorIndex>=this.count){
+            throw new IllegalArgumentException();
+        }
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
         return leftNode.y+((rightNode.y - leftNode.y)*(x-leftNode.x)) / (rightNode.x - leftNode.x);

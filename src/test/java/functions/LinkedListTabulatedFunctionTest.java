@@ -53,14 +53,28 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
             Assert.assertEquals(xval[i],list.getX(i));
         }
     }
-
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testGetXEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.getX(-1);
+        llist.getX(llist.getCount());
+    }
     @Test
     public void testGetY() {
         for (int i=0;i<5;i++){
             Assert.assertEquals(yval[i],list.getY(i));
         }
     }
-
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testGetYEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.getY(-1);
+        llist.getY(llist.getCount());
+    }
     @Test
     public void testSetY() {
         for (int i=0;i<5;i++){
@@ -71,12 +85,50 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
             Assert.assertEquals(yval[i],list.getY(i));
         }
     }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testSetYEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.setY(-1,14);
+        llist.setY(llist.getCount(),14);
+    }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testIndexOfXEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.indexOfX(-1);
+        llist.indexOfX(5);
+    }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testIndexOfYEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.indexOfY(-1);
+        llist.indexOfY(5);
+    }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFloorIndexOfXEx() {
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.floorIndexOfX(-1);
+    }
     @Test
     public void testInterpolate() {
         Assert.assertEquals(1.0,list.interpolate(1,2));
         Assert.assertEquals(2.0,list.interpolate(2,2));
     }
-
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testInterpolateEx(){
+        double[] xxval={1,2,3,4,5};
+        double[] yyval={1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(xxval,yyval);
+        llist.interpolate(12,-1);
+        llist.interpolate(12,5);
+    }
     @Test
     public void testExtrapolateLeft() {
         Assert.assertEquals(1.0,list.extrapolateLeft(1));
