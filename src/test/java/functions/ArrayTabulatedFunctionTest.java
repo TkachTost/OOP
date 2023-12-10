@@ -1,5 +1,8 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -89,10 +92,12 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testInterpolate() {
-        Assert.assertEquals(1.0, val.interpolate(1, 2));
-        Assert.assertEquals(2.0, val.interpolate(2, 2));
+        Assert.assertEquals(2.5, val.interpolate(2.5, 1));
     }
-
+    @Test(expectedExceptions = InterpolationException.class)
+    public void testTestInterpolate() {
+        val.interpolate(1,1);
+    }
     @Test
     public void testTestToString() {
         double[] xxval = {1, 2, 3, 4, 5};
@@ -129,5 +134,17 @@ public class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction vval=new ArrayTabulatedFunction(xxval,yyval);
         ArrayTabulatedFunction cl= (ArrayTabulatedFunction) vval.clone();
         Assert.assertEquals(vval.toString(),cl.toString());
+    }
+    @Test(expectedExceptions = DifferentLengthOfArraysException.class)
+    public void ArrayTabulatedFunctionEx1(){
+        double[] arr1=new double[]{1,2,3};
+        double[] arr2=new double[]{1,2,3,4,5};
+        ArrayTabulatedFunction arr=new ArrayTabulatedFunction(arr1,arr2);
+    }
+    @Test(expectedExceptions = ArrayIsNotSortedException.class)
+    public void ArrayTabulatedFunctionEx2(){
+        double[] arr1=new double[]{1,2,3,5,4};
+        double[] arr2=new double[]{5,4,3,2,1};
+        ArrayTabulatedFunction arr=new ArrayTabulatedFunction(arr1,arr2);
     }
 }

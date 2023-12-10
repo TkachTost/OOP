@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     protected static class Node implements Cloneable{
         public Node next;
@@ -53,6 +55,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
     }
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        ArrayTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
+        ArrayTabulatedFunction.checkSorted(xValues);
+        ArrayTabulatedFunction.checkSorted(yValues);
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
@@ -157,8 +162,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public double interpolate(double x, int floorIndex) {
-        if(floorIndex<0 || floorIndex>=this.count){
-            throw new IllegalArgumentException();
+        if(x<this.getX(floorIndex)||x>this.getX(floorIndex+1)){
+            throw new InterpolationException();
         }
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;

@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -118,8 +120,7 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
     }
     @Test
     public void testInterpolate() {
-        Assert.assertEquals(1.0,list.interpolate(1,2));
-        Assert.assertEquals(2.0,list.interpolate(2,2));
+        Assert.assertEquals(2.5,list.interpolate(2.5,1));
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testInterpolateEx(){
@@ -172,5 +173,17 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
         for (int i=0;i<5;i++){
             Assert.assertEquals(list.getX(i),o.getX(i));
         }
+    }
+    @Test(expectedExceptions = DifferentLengthOfArraysException.class)
+    public void LincEx1(){
+        double[] arr1=new double[]{1,2,3};
+        double[] arr2=new double[]{1,2,3,4,5};
+        LinkedListTabulatedFunction list1=new LinkedListTabulatedFunction(arr1,arr2);
+    }
+    @Test(expectedExceptions = ArrayIsNotSortedException.class)
+    public void LincEx2(){
+        double[] arr1=new double[]{1,2,3,5,4};
+        double[] arr2=new double[]{5,4,3,2,1};
+        LinkedListTabulatedFunction list2=new LinkedListTabulatedFunction(arr1,arr2);
     }
 }

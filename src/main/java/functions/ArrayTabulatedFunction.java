@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
@@ -7,6 +9,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        ArrayTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
+        ArrayTabulatedFunction.checkSorted(xValues);
+        ArrayTabulatedFunction.checkSorted(yValues);
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
@@ -115,6 +120,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+        if(x<xValues[floorIndex]||x>xValues[floorIndex+1]){
+            throw new InterpolationException();
+        }
         if (count == 1) {
             return yValues[0];
         }
