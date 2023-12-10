@@ -2,6 +2,9 @@ package functions;
 
 import exceptions.InterpolationException;
 
+import java.awt.*;
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     protected static class Node implements Cloneable{
         public Node next;
@@ -238,5 +241,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     @Override
     public Object clone () throws CloneNotSupportedException {
         return (LinkedListTabulatedFunction)super.clone();
+    }
+    @Override
+    public Iterator<Point> iterator(){
+        throw new UnsupportedOperationException();
     }
 }
