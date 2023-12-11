@@ -197,6 +197,11 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
         int i=0;
         while(iterator.hasNext()) {
             Assert.assertEquals(iterator.next().x,llist.getX(i++));
+
+        }
+        i=0;
+        iterator=llist.iterator();
+        while(iterator.hasNext()) {
             Assert.assertEquals(iterator.next().y,llist.getY(i++));
 
         }

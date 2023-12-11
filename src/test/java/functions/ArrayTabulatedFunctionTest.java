@@ -6,6 +6,8 @@ import exceptions.InterpolationException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
+
 public class ArrayTabulatedFunctionTest {
 
     private double[] xval = {1, 2, 3, 4, 5};
@@ -146,5 +148,27 @@ public class ArrayTabulatedFunctionTest {
         double[] arr1=new double[]{1,2,3,5,4};
         double[] arr2=new double[]{5,4,3,2,1};
         ArrayTabulatedFunction arr=new ArrayTabulatedFunction(arr1,arr2);
+    }
+
+    @Test
+    public void testIterator() {
+        double[] xxval = {1, 2, 3, 4, 5};
+        double[] yyval = {1, 2, 3, 4, 5};
+        ArrayTabulatedFunction arr=new ArrayTabulatedFunction(xxval,yyval);
+        Iterator<Point> iterator= arr.iterator();
+        int i=0;
+        while (iterator.hasNext()){
+            Assert.assertEquals(iterator.next().x,arr.getX(i++));
+        }
+        iterator= arr.iterator();
+        i=0;
+        while (iterator.hasNext()){
+            Assert.assertEquals(iterator.next().y,arr.getY(i++));
+        }
+        i=0;
+        for (Point point: arr){
+            Assert.assertEquals(point.x,arr.getX(i));
+            Assert.assertEquals(point.y,arr.getY(i++));
+        }
     }
 }
