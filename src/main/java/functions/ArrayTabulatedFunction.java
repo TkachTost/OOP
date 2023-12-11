@@ -5,6 +5,7 @@ import exceptions.InterpolationException;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private double[] xValues;
@@ -171,7 +172,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return (ArrayTabulatedFunction)super.clone();
     }
     @Override
-    public Iterator<Point> iterator(){
+    public Iterator<Point> iterator()  {
         throw new UnsupportedOperationException();
     }
 }

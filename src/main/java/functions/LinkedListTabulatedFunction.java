@@ -4,6 +4,7 @@ import exceptions.InterpolationException;
 
 import java.awt.*;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     protected static class Node implements Cloneable{
@@ -243,7 +244,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return (LinkedListTabulatedFunction)super.clone();
     }
     @Override
-    public Iterator<Point> iterator(){
-        throw new UnsupportedOperationException();
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private Node node = head;
+            @Override
+            public boolean hasNext() {
+                return node.next!=head;
+            }
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+
+                Point point = new Point(node.x,node.y);
+                node = node.next;
+                return point;
+            }
+
+        };
     }
 }

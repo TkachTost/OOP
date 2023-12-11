@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.xml.soap.Node;
+import java.util.Iterator;
 
 public class LinkedListTabulatedFunctionTest implements Cloneable{
     private double[] xval={1,2,3,4,5};
@@ -185,5 +186,25 @@ public class LinkedListTabulatedFunctionTest implements Cloneable{
         double[] arr1=new double[]{1,2,3,5,4};
         double[] arr2=new double[]{5,4,3,2,1};
         LinkedListTabulatedFunction list2=new LinkedListTabulatedFunction(arr1,arr2);
+    }
+
+    @Test
+    public void testIterator() {
+        double[] arr1=new double[]{1,2,3,4,5};
+        double[] arr2=new double[]{1,2,3,4,5};
+        LinkedListTabulatedFunction llist=new LinkedListTabulatedFunction(arr1,arr2);
+        Iterator<Point> iterator=llist.iterator();
+        int i=0;
+        while(iterator.hasNext()) {
+            Assert.assertEquals(iterator.next().x,llist.getX(i++));
+            Assert.assertEquals(iterator.next().y,llist.getY(i++));
+
+        }
+        i=0;
+        for (Point integer: llist){
+            Assert.assertEquals(integer.x,llist.getX(i));
+            Assert.assertEquals(integer.y,llist.getY(i++));
+
+        }
     }
 }
