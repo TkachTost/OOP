@@ -3,11 +3,14 @@ package functions;
 import exceptions.InterpolationException;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
-    protected static class Node implements Cloneable{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable,Serializable{
+    private static final long serialVersionUID = 1L;
+    protected static class Node implements Cloneable, Serializable {
+        private static final long serialVersionUID = 1L;
         public Node next;
         public Node prev;
         public double x;
@@ -57,15 +60,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             last.next = newNode;
             head.prev = newNode;
         }
+        count++;
     }
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        count=0;
         ArrayTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
         ArrayTabulatedFunction.checkSorted(xValues);
         ArrayTabulatedFunction.checkSorted(yValues);
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
-        count=xValues.length;
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {

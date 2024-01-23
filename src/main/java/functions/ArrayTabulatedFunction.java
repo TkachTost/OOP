@@ -3,13 +3,15 @@ package functions;
 import exceptions.InterpolationException;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Serializable {
     private double[] xValues;
     private double[] yValues;
+    private static final long serialVersionUID = 19L;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         ArrayTabulatedFunction.checkLengthIsTheSame(xValues, yValues);

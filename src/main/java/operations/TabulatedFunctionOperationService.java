@@ -23,10 +23,10 @@ public class TabulatedFunctionOperationService {
     }
     public static Point[] asPoints(TabulatedFunction tabulatedFunction){
         Point[] points = new Point[tabulatedFunction.getCount()];
-        Iterator<Point> iterator=tabulatedFunction.iterator();
         int i = 0;
-        while (iterator.hasNext()){
-            points[i++]=iterator.next();
+        for (Point point : tabulatedFunction) {
+            points[i] = point;
+            i++;
         }
         return points;
     }
@@ -64,5 +64,13 @@ public class TabulatedFunctionOperationService {
     }
     public TabulatedFunction divide(TabulatedFunction a, TabulatedFunction b) throws InconsistentFunctionsException {
         return doOperation(a, b, (u, v) -> u / v);
+    }
+    public TabulatedFunction Addition(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u + v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
+    public TabulatedFunction Subtraction(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u - v;
+        return doOperation(firstFunction, secondFunction, operation);
     }
 }
